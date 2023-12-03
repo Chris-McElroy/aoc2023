@@ -15,7 +15,7 @@ public func inputStrings(_ separator: String = "\n") -> [String] {
 	do {
 		let home = FileManager.default.homeDirectoryForCurrentUser
 		let name = "input" + (day < 10 ? "0" : "") + "\(day)"
-		let filePath = projectFolder + "/aoc2023/" + name
+        let filePath = projectFolder + "/aoc2023/" + (testRun ? "testInput" : name)
 		let file = URL(fileURLWithPath: filePath, relativeTo: home)
 		let list = try String(contentsOf: file).dropLast().components(separatedBy: separator)
 		return list
@@ -324,6 +324,34 @@ public extension Array where Element: Equatable {
 	}
 }
 
+public extension Array<Array<Any>> {
+    subscript(_ p: C2) -> Element.Element {
+        self[p.y][p.x]
+    }
+    
+    func points() -> [C2] {
+        (0..<self.count).flatMap { y in (0..<self[y].count).map { x in C2(x, y) } }
+    }
+    
+    func pointsGrid() -> [[C2]] {
+        (0..<self.count).map { y in (0..<self[y].count).map { x in C2(x, y) } }
+    }
+}
+
+public extension Array<String> {
+    subscript(_ p: C2) -> Character {
+        self[p.y][p.x]
+    }
+    
+    func points() -> [C2] {
+        (0..<self.count).flatMap { y in (0..<self[y].count).map { x in C2(x, y) } }
+    }
+    
+    func pointsGrid() -> [[C2]] {
+        (0..<self.count).map { y in (0..<self[y].count).map { x in C2(x, y) } }
+    }
+}
+
 public extension Dictionary {
 	init<Element>(from array: [[Element]], key: Int, value: Int) where Element: Hashable {
 		self.init()
@@ -578,6 +606,20 @@ public extension Numeric where Self: Comparable {
 	}
 }
 
+public extension Int {
+    mutating func append(_ digit: Self) {
+        self = self*10 + digit
+    }
+    
+    mutating func append(_ digit: Character) {
+        self = self*10 + Int(digit)!
+    }
+    
+    mutating func append(_ digits: String) {
+        for d in digits { self.append(d) }
+    }
+}
+
 infix operator ** : MultiplicationPrecedence
 public extension Numeric {
 	func sqrd() -> Self {
@@ -612,7 +654,7 @@ public extension BinaryInteger {
 	var isOdd: Bool { self % 2 == 1 }
 }
 
-struct C2: Equatable, Hashable, AdditiveArithmetic {
+public struct C2: Equatable, Hashable, AdditiveArithmetic {
 	var x: Int
 	var y: Int
 	
@@ -642,7 +684,7 @@ struct C2: Equatable, Hashable, AdditiveArithmetic {
 	var adjacentsWithSelf: [C2] { C2.zeroAdjacents.map({ C2(x + $0.0, y + $0.1) }) + [self] }
 	var neighborsWithSelf: [C2] { C2.zeroNeighbors.map({ C2(x + $0.0, y + $0.1) }) + [self] }
 	
-	static var zero: C2 = C2(0, 0)
+    public static var zero: C2 = C2(0, 0)
 	
 	mutating func rotateLeft() {
 		let tempX = x
@@ -667,17 +709,49 @@ struct C2: Equatable, Hashable, AdditiveArithmetic {
 	func vectorLength() -> Double {
 		sqrt(Double(x*x + y*y))
 	}
+    
+    func inBounds(of array: any Collection<any Collection<Any>>) -> Bool {
+        x.isin(0..<(array.first?.count ?? 1)) && y.isin(0..<array.count)
+    }
+    
+    func inBounds(of array: any Collection<String>) -> Bool {
+        x.isin(0..<(array.first?.count ?? 1)) && y.isin(0..<array.count)
+    }
+    
+    func endOfLine(of array: Array<any Collection<Any>>) -> Bool {
+        x == array[y].count - 1
+    }
+    
+    func endOfLine(of array: Array<String>) -> Bool {
+        x == array[y].count - 1
+    }
+    
+    func adjacentsInBounds(of array: any Collection<any Collection<Any>>) -> [C2] {
+        adjacents.filter { $0.inBounds(of: array) }
+    }
+    
+    func adjacentsInBounds(of array: any Collection<String>) -> [C2] {
+        adjacents.filter { $0.inBounds(of: array) }
+    }
+    
+    func neighborsInBounds(of array: any Collection<any Collection<Any>>) -> [C2] {
+        neighbors.filter { $0.inBounds(of: array) }
+    }
+    
+    func neighborsInBounds(of array: any Collection<String>) -> [C2] {
+        neighbors.filter { $0.inBounds(of: array) }
+    }
 	
-	static func + (lhs: C2, rhs: C2) -> C2 {
+    public static func + (lhs: C2, rhs: C2) -> C2 {
 		C2(lhs.x + rhs.x, lhs.y + rhs.y)
 	}
 	
-	static func - (lhs: C2, rhs: C2) -> C2 {
+    public static func - (lhs: C2, rhs: C2) -> C2 {
 		C2(lhs.x - rhs.x, lhs.y - rhs.y)
 	}
 }
 
-struct C3: Equatable, Hashable, AdditiveArithmetic {
+public struct C3: Equatable, Hashable, AdditiveArithmetic {
 	var x: Int
 	var y: Int
 	var z: Int
@@ -697,7 +771,7 @@ struct C3: Equatable, Hashable, AdditiveArithmetic {
 	var adjacentsWithSelf: [C3] { C3.zeroAdjacents.map({ C3(x + $0.0, y + $0.1, z + $0.2) }) + [self] }
 	var neighborsWithSelf: [C3] { C3.zeroNeighbors.map({ C3(x + $0.0, y + $0.1, z + $0.2) }) + [self] }
 	
-	static var zero: C3 = C3(0, 0, 0)
+    public static var zero: C3 = C3(0, 0, 0)
 	
 	func manhattanDistance() -> Int {
 		abs(x) + abs(y) + abs(z)
@@ -707,11 +781,11 @@ struct C3: Equatable, Hashable, AdditiveArithmetic {
 		sqrt(Double(x*x + y*y + z*z))
 	}
 	
-	static func + (lhs: C3, rhs: C3) -> C3 {
+	public static func + (lhs: C3, rhs: C3) -> C3 {
 		C3(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z)
 	}
 	
-	static func - (lhs: C3, rhs: C3) -> C3 {
+	public static func - (lhs: C3, rhs: C3) -> C3 {
 		C3(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z)
 	}
 }
