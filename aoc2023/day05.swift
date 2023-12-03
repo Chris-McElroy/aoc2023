@@ -8,14 +8,14 @@
 import Foundation
 
 func d5() {
-	let computer = IntcodeComputer(input: [1])
-	computer.runToEnd()
-	print(computer.output.first { $0 != 0 }!)
-	
-	computer.reset(input: [5])
-	computer.runToEnd()
-	print(computer.output.first { $0 != 0 }!)
+    testRun = true
+    let input = inputStrings()
+    var a1 = 0
+    var a2 = 0
+
+    print(a1)
+    print(a2)
 }
 
-// 16434972
-// 16694270
+// a1
+// a2

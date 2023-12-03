@@ -10,7 +10,7 @@ import Foundation
 // set this to the project's file path before running
 let projectFolder = "main/code/aoc2023"
 
-let day = 3
+let day = 4
 var testRun = false
 
 let functions: [() -> Void] = [

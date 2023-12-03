@@ -8,33 +8,14 @@
 import Foundation
 
 func d7() {
-	var maxSignal = 0
-	for p in [0,1,2,3,4].permutations() {
-		var signal = 0
-		for a in 0..<5 {
-			let amp = IntcodeComputer(input: [p[a], signal])
-			amp.runToEnd()
-			signal = amp.output.first!
-		}
-		maxSignal = max(maxSignal, signal)
-	}
-	print(maxSignal)
-	
-	maxSignal = 0
-	
-	
-	for p in [5,6,7,8,9].permutations() {
-		let amps = p.map { IntcodeComputer(input: [$0]) }
-		var signal = 0
-		var stillWorking = true
-		while stillWorking {
-			for a in 0..<5 {
-				amps[a].input.append(signal)
-				stillWorking = amps[a].runToOutput()
-				signal = amps[a].output.last!
-			}
-		}
-		maxSignal = max(maxSignal, signal)
-	}
-	print(maxSignal)
+    testRun = true
+    let input = inputStrings()
+    var a1 = 0
+    var a2 = 0
+
+    print(a1)
+    print(a2)
 }
+
+// a1
+// a2
