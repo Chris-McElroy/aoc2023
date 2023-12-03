@@ -8,6 +8,7 @@
 import Foundation
 import Accelerate
 import CryptoKit
+import AppKit
 
 // input functions //
 
@@ -79,6 +80,21 @@ public func inputOneInt(word: Int, _ wordSeparators: [String] = [" "], _ lineSep
 }
 
 // shortcuts //
+
+func printAnswer<T>(_ answer: T, _ testValue: T?, _ realValue: T?) where T: Equatable {
+    guard let correctValue = testRun ? testValue : realValue else {
+        print(answer, "\t\t", testRun ? "(test)" : "(real)")
+        return
+    }
+    print(answer, "\t\t", testRun ? "(test)" : "(real)", correctValue == answer ? "✅" : "❌")
+}
+
+func copy(_ answer: Any) {
+    var stringVersion = ""
+    print(answer, to: &stringVersion)
+    NSPasteboard.general.clearContents()
+    NSPasteboard.general.setString(stringVersion, forType: .string)
+}
 
 func make2DArray<Element>(repeating repeatedValue: Element, count1: Int, count2: Int) -> [[Element]] {
 	(0..<count1).map { _ in Array(repeating: repeatedValue, count: count2) }

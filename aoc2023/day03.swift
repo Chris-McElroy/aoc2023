@@ -44,9 +44,7 @@ func d3() {
         }
     }
     
-    print(a1)
-    print(a2)
+    printAnswer(a1, 4361, 535351)
+    printAnswer(a2, 467835, 87287096)
+    copy(a1)
 }
-
-// 535351
-// 87287096
