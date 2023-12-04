@@ -100,6 +100,10 @@ func make2DArray<Element>(repeating repeatedValue: Element, count1: Int, count2:
 	(0..<count1).map { _ in Array(repeating: repeatedValue, count: count2) }
 }
 
+func upTo(_ bound: Int) -> Range<Int> {
+    0..<bound
+}
+
 public extension Collection {
 	func sum<N: AdditiveArithmetic>(_ partialResult: (Element) -> N) -> N {
 		self.reduce(.zero, { $0 + partialResult($1) })
@@ -633,6 +637,15 @@ public extension Int {
     
     mutating func append(_ digits: String) {
         for d in digits { self.append(d) }
+    }
+    
+    func pow(_ to: Int) -> Int {
+        guard to >= 0 else { return 0 }
+        return Array(repeating: self, count: to).reduce(1, *)
+    }
+    
+    func upTo(_ bound: Int) -> Range<Int> {
+        self..<bound
     }
 }
 

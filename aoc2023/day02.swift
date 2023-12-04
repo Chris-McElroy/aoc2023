@@ -30,9 +30,6 @@ func d2() {
         if valid { a1 += gameID }
         a2 += mins.values.product()
     }
-    print(a1)
-    print(a2)
+    printAnswer(a1, 8, 2076)
+    printAnswer(a2, 2286, 70950)
 }
-
-// 2076
-// 70950

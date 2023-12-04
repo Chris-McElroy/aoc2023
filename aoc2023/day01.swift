@@ -34,9 +34,6 @@ func d1() {
         a1 += n1.0*10 + n1.1
         a2 += n2.0*10 + n2.1
     }
-    print(a1)
-    print(a2)
+    printAnswer(a1, 142, 53651)
+    printAnswer(a2, 281, 53894)
 }
-
-// 53651
-// 53894
