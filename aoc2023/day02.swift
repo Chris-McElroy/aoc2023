@@ -8,26 +8,21 @@
 import Foundation
 
 func d2() {
+//    testRun = true
     let maxes = ["red": 12, "green": 13, "blue": 14]
-    let input = inputWords(["; "])
+    let input = inputWords()
     var a1 = 0
     var a2 = 0
-    for var (i, game) in input.enumerated() {
-        let gameID = i + 1
+    for (i, game) in input.enumerated() {
         var mins = ["red": 0, "green": 0, "blue": 0]
         var valid = true
-        game[0].removeFirst(game[0].firstIndex(of: ":")! + 2)
-        for handful in game {
-            let colors = handful.split(separator: ", ")
-            for color in colors {
-                let parts = color.split(separator: " ")
-                let num = Int(parts[0])!
-                let colorName = String(parts[1])
-                if num > maxes[colorName]! { valid = false }
-                mins[colorName] = max(num, mins[colorName]!)
-            }
+        for j in upTo((game.count - 2)/2) {
+            let num = Int(game[j*2 + 2])!
+            let colorName = String(game[j*2 + 3].filter { $0.isLetter })
+            if num > maxes[colorName]! { valid = false }
+            mins[colorName] = max(num, mins[colorName]!)
         }
-        if valid { a1 += gameID }
+        if valid { a1 += i + 1 }
         a2 += mins.values.product()
     }
     printAnswer(a1, 8, 2076)

@@ -8,14 +8,12 @@
 import Foundation
 
 func d5() {
-//    testRun = true
-//    let input = inputStrings()
-//    var a1 = 0
-//    var a2 = 0
-//
-//    print(a1)
-//    print(a2)
-}
+    testRun = true
+    let input = inputStrings()
+    var a1 = 0
+    var a2 = 0
 
-// a1
-// a2
+    printAnswer(a1, nil, nil)
+    printAnswer(a2, nil, nil)
+    copy(a1)
+}

@@ -13,9 +13,7 @@ func d10() {
 //    var a1 = 0
 //    var a2 = 0
 //
-//    print(a1)
-//    print(a2)
+//    printAnswer(a1, nil, nil)
+//    printAnswer(a2, nil, nil)
+//    copy(a1)
 }
-
-// a1
-// a2
