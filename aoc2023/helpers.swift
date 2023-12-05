@@ -47,7 +47,7 @@ public func inputWords(_ wordSeparators: [String] = [" "], _ lineSeparator: Stri
 
 public func inputIntWords(_ wordSeparators: [String] = [" "], _ lineSeparator: String = "\n") -> [[Int]] {
 	let input = inputWords(wordSeparators, lineSeparator)
-	return input.map { words in words.map { word in Int(word)! } }
+	return input.map { words in words.compactMap { word in Int(word) } }
 }
 
 public func inputSomeInts(words: [Int], _ wordSeparators: [String] = [" "], _ lineSeparator: String = "\n") -> [[Int]] {

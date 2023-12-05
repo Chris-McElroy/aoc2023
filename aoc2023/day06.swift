@@ -8,12 +8,12 @@
 import Foundation
 
 func d6() {
-//    testRun = true
-//    let input = inputStrings()
-//    var a1 = 0
-//    var a2 = 0
-//
-//    printAnswer(a1, nil, nil)
-//    printAnswer(a2, nil, nil)
+    testRun = true
+    let input = inputStrings()
+    var a1 = 0
+    var a2 = 0
+
+    printAnswer(a1, nil, nil)
+    printAnswer(a2, nil, nil)
 //    copy(a1)
 }
