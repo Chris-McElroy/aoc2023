@@ -9,11 +9,28 @@ import Foundation
 
 func d6() {
     testRun = true
-    let input = inputStrings()
-    var a1 = 0
+    let input = inputIntWords()
+    var a1 = 1
     var a2 = 0
 
-    printAnswer(a1, nil, nil)
-    printAnswer(a2, nil, nil)
+    for i in upTo(input[0].count) {
+        a1 *= dumbAlgebraSolution(time: input[0][i], dist: input[1][i])
+    }
+    
+    let time = Int(input[0].map { String($0) }.joined())!
+    let dist = Int(input[1].map { String($0) }.joined())!
+    a2 = dumbAlgebraSolution(time: time, dist: dist)
+    
+    printAnswer(a1, 288, 608902)
+    printAnswer(a2, 71503, 46173809)
 //    copy(a1)
+    
+    func dumbAlgebraSolution(time: Int, dist: Int) -> Int {
+        let range: Double = sqrt(Double(time*time - 4*dist))
+        if time % 2 == 0 {
+            return Int(((range)/2).rounded(.awayFromZero))*2 - 1
+        } else {
+            return Int(((range - 1)/2).rounded(.awayFromZero))*2
+        }
+    }
 }
