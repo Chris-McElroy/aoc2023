@@ -81,6 +81,10 @@ public func inputOneInt(word: Int, _ wordSeparators: [String] = [" "], _ lineSep
 
 // shortcuts //
 
+enum RunType {
+    case real, test, all
+}
+
 func printAnswer<T>(_ answer: T, _ testValue: T?, _ realValue: T?) where T: Equatable {
     guard let correctValue = testRun ? testValue : realValue else {
         print(answer, "\t\t", testRun ? "(test)" : "(real)")
