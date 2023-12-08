@@ -7,13 +7,14 @@
 
 import Foundation
 
+func getRunType() -> RunType { .all }
+
 func d9() {
-//    testRun = true
-//    let input = inputStrings()
-//    var a1 = 0
-//    var a2 = 0
-//
-//    printAnswer(a1, nil, nil)
-//    printAnswer(a2, nil, nil)
-//    copy(a1)
+    let input = inputStrings()
+    var a1 = 0
+    var a2 = 0
+
+    printAnswer(a1, nil, nil)
+    printAnswer(a2, nil, nil)
+    copy(a1)
 }
