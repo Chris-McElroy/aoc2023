@@ -7,14 +7,27 @@
 
 import Foundation
 
-func getRunType() -> RunType { .all }
-
 func d9() {
-    let input = inputStrings()
+    let input = inputIntWords()
     var a1 = 0
     var a2 = 0
+    
+    for line in input {
+        var dif: [Int] = line
+        var newEnd = line.last!
+        var newBeg = line.first!
+        var alt = true
+        repeat {
+            dif = upTo(dif.count - 1).map { dif[$0 + 1] - dif[$0] }
+            newEnd += dif.last!
+            newBeg += alt ? -dif.first! : dif.first!
+            alt.toggle()
+        } while dif.contains(where: { $0 != 0 })
+        a1 += newEnd
+        a2 += newBeg
+    }
 
-    printAnswer(a1, nil, nil)
-    printAnswer(a2, nil, nil)
+    printAnswer(a1, 114, 2098530125)
+    printAnswer(a2, 2, 1016)
     copy(a1)
 }
