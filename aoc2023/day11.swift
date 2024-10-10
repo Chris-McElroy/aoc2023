@@ -8,7 +8,7 @@
 import Foundation
 
 func d11() {
-    var input = inputStrings().map { Array($0) } // TODO i should have something for this. i should also be able to take indexes of a string??
+    let input = inputStrings()
     var a1 = 0
     var a2 = 0
     
@@ -17,15 +17,15 @@ func d11() {
     let galaxies = getGalaxies()
     
     
-    for (i, g1) in galaxies.enumerated() {
-        for g2 in galaxies.dropFirst(i + 1) { // TODO i want to be able to say where g1 < g2
-            for c in min(g1.x, g2.x)..<max(g1.x, g2.x) { // TODO i want to be able to support this better
+    for g1 in galaxies {
+        for g2 in galaxies where g1 < g2 {
+            for c in between(g1.x, g2.x) {
                 if cols.contains(c) {
                     a1 += 1
                     a2 += 1000000 - 1
                 }
             }
-            for r in min(g1.y, g2.y)..<max(g1.y, g2.y) {
+            for r in between(g1.y, g2.y) {
                 if rows.contains(r) {
                     a1 += 1
                     a2 += 1000000 - 1
@@ -36,11 +36,11 @@ func d11() {
         }
     }
 
-    printAnswer(a1, nil, nil)
-    printAnswer(a2, nil, nil)
+    printAnswer(a1, 374, 10077850)
+    printAnswer(a2, 82000210, 504715068438)
     copy(a1)
     
-    func expandSpace() -> ([Int], [Int]){
+    func expandSpace() -> ([Int], [Int]) {
         var rows: [Int] = []
         var cols: [Int] = []
         

@@ -8,13 +8,13 @@
 import Foundation
 
 func d10() {
-    var input = inputStrings()
+    let input = inputStrings()
     var a1 = 0
     var a2 = 0
     
-    var startY = input.enumerated().first(where: { $0.element.contains("S")})!.offset
-    var startX = input[startY].firstIndex(of: "S")!
-    var start = C2(startX, startY)
+    let startY = input.enumerated().first(where: { $0.element.contains("S")})!.offset
+    let startX = input[startY].firstIndex(of: "S")!
+    let start = C2(startX, startY)
     
     var cur: C2 = C2(0,0)
     var previous: Set<C2> = [start]
@@ -95,8 +95,8 @@ func d10() {
     a1 = steps/2 + 1
     a2 = input.count*input[0].count - typeMap.count { $0.value != .inside }
     
-    printAnswer(a1, 80, nil)
-    printAnswer(a2, nil, 291)
+    printAnswer(a1, 70, 7173)
+    printAnswer(a2, 8, 291)
     copy(a2)
     
     func facing(d: C2) -> [C2] {

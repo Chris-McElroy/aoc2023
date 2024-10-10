@@ -8,7 +8,6 @@
 import Foundation
 
 func d5() {
-//    testRun = true
     let input = inputIntWords()
     var a1 = 0
     var a2 = 0

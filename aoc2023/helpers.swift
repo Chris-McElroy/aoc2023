@@ -10,13 +10,50 @@ import Accelerate
 import CryptoKit
 import AppKit
 
+// running //
+
+
+enum RunType {
+    case real, test, all
+}
+
+
+var runType: RunType = .all
+var currentRun: RunType = .test
+
+func doRuns() {
+    if runType != .real {
+        currentRun = .test
+        run()
+    }
+    if runType != .test {
+        currentRun = .real
+        run()
+    }
+}
+
+func run() {
+    let start = Date().timeIntervalSinceReferenceDate
+    functions[day - 1]()
+    let end = Date().timeIntervalSinceReferenceDate
+    print("in:", end-start)
+}
+
+func printAnswer<T>(_ answer: T, _ testValue: T?, _ realValue: T?) where T: Equatable {
+    guard let correctValue = currentRun == .test ? testValue : realValue else {
+        print(answer, "\t\t", currentRun == .test ? "(test)" : "(real)")
+        return
+    }
+    print(answer, "\t\t", currentRun == .test ? "(test)" : "(real)", correctValue == answer ? "✅" : "❌")
+}
+
 // input functions //
 
 public func inputStrings(_ separator: String = "\n") -> [String] {
 	do {
 		let home = FileManager.default.homeDirectoryForCurrentUser
 		let name = "input" + (day < 10 ? "0" : "") + "\(day)"
-        let filePath = projectFolder + "/aoc2023/" + (testRun ? "testInput" : name)
+        let filePath = projectFolder + "/aoc2023/" + (currentRun == .test ? "testInput" : name)
 		let file = URL(fileURLWithPath: filePath, relativeTo: home)
 		let list = try String(contentsOf: file).dropLast().components(separatedBy: separator)
 		return list
@@ -81,17 +118,6 @@ public func inputOneInt(word: Int, _ wordSeparators: [String] = [" "], _ lineSep
 
 // shortcuts //
 
-enum RunType {
-    case real, test, all
-}
-
-func printAnswer<T>(_ answer: T, _ testValue: T?, _ realValue: T?) where T: Equatable {
-    guard let correctValue = testRun ? testValue : realValue else {
-        print(answer, "\t\t", testRun ? "(test)" : "(real)")
-        return
-    }
-    print(answer, "\t\t", testRun ? "(test)" : "(real)", correctValue == answer ? "✅" : "❌")
-}
 
 func copy(_ answer: Any) {
     var stringVersion = ""
@@ -106,6 +132,10 @@ func make2DArray<Element>(repeating repeatedValue: Element, count1: Int, count2:
 
 func upTo(_ bound: Int) -> Range<Int> {
     0..<bound
+}
+
+func between(_ x: Int, _ y: Int) -> Range<Int> {
+    min(x, y)..<max(x, y)
 }
 
 public extension Collection {
@@ -668,13 +698,6 @@ public extension Bool {
 	var int: Int { self ? 1 : 0 }
 }
 
-func timed(_ run: () -> Void) {
-	let start = Date().timeIntervalSinceReferenceDate
-	run()
-	let end = Date().timeIntervalSinceReferenceDate
-	print("in:", end-start)
-}
-
 public extension BinaryFloatingPoint {
 	var isWhole: Bool { self.truncatingRemainder(dividingBy: 1) == 0 }
 	var isEven: Bool { Int(self) % 2 == 0 }
@@ -687,7 +710,7 @@ public extension BinaryInteger {
 	var isOdd: Bool { self % 2 == 1 }
 }
 
-public struct C2: Equatable, Hashable, AdditiveArithmetic {
+public struct C2: Equatable, Hashable, AdditiveArithmetic, Comparable {
 	var x: Int
 	var y: Int
 	
@@ -782,6 +805,10 @@ public struct C2: Equatable, Hashable, AdditiveArithmetic {
     public static func - (lhs: C2, rhs: C2) -> C2 {
 		C2(lhs.x - rhs.x, lhs.y - rhs.y)
 	}
+    
+    public static func < (lhs: C2, rhs: C2) -> Bool {
+        (lhs.y > rhs.y) || (lhs.y == rhs.y && lhs.x > rhs.x)
+    }
 }
 
 public struct C3: Equatable, Hashable, AdditiveArithmetic {

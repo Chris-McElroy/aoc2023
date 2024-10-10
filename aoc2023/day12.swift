@@ -7,67 +7,25 @@
 
 import Foundation
 
-func getRunType() -> RunType { .all }
-
 func d12() {
+    runType = .all
     let input = inputWords()
     var a1 = 0
     var a2 = 0
     
     var memos: [Int: [[Int]: Int]] = [:]
     
-//    let lines = input.map { $0[0] }
-//    let answers = input.map { $0[1].split(separator: ",") }
-    
     var dat: String = ""
     
     for line in input {
         let answer = line[1].split(separator: ",").map { Int($0)! }
-        var worked = 0
-        
-//        for n in 0..<(1 << line[0].count(where: { $0 == "?" })) {
-//            var workingCount: Int? = nil
-//            var workingCounts: [Int] = []
-//            var options = 0
-//            for character in line[0] {
-//                var broken = character == "#"
-//                if character == "?" {
-//                    broken = ((n >> options) & 1) == 1
-//                    options += 1
-//                }
-//                if broken {
-//                    workingCount = (workingCount ?? 0) + 1
-//                } else if let wc = workingCount {
-//                    workingCounts.append(wc)
-//                    workingCount = nil
-//                }
-//            }
-//            
-//            if let wc = workingCount {
-//                workingCounts.append(wc)
-//            }
-//            
-//            //            print(workingCounts)
-//            
-//            if workingCounts == answer {
-//                worked += 1
-//            }
-//        }
-//        a1 += worked
-        
-//        dat = Array(repeating: line[0], count: 5).joined(separator: "?")
-        let longans = Array(Array(repeating: answer, count: 5).joined())
-
+        let longanswer = Array(Array(repeating: answer, count: 5).joined())
         
         memos = [:]
-//        dat = line[0]
-//        print(dat, answer)
-//        print(counter(last: line[0].count, sizes: answer))
+        dat = line[0]
+        a1 += counter(last: line[0].count, sizes: answer)
         dat = Array(repeating: line[0], count: 5).joined(separator: "?")
-//        print(dat, longans)
-//        print(counter(last: dat.count, sizes: longans))
-//        print()
-        a2 += counter(last: dat.count, sizes: longans)
+        a2 += counter(last: dat.count, sizes: longanswer)
     }
     
     func counter(last: Int, sizes: [Int]) -> Int {
@@ -100,7 +58,7 @@ func d12() {
         return answer
     }
 
-    printAnswer(a1, nil, nil)
-    printAnswer(a2, nil, nil)
+    printAnswer(a1, 21, 7792)
+    printAnswer(a2, 525152, 13012052341533)
     copy(a1)
 }

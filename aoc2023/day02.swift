@@ -8,7 +8,6 @@
 import Foundation
 
 func d2() {
-//    testRun = true
     let maxes = ["red": 12, "green": 13, "blue": 14]
     let input = inputWords()
     var a1 = 0
