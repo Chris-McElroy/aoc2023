@@ -7,10 +7,8 @@
 
 import Foundation
 
-func getRunType() -> RunType { .real }
-
 func d11() {
-    var input = inputStrings().map { Array($0) }
+    var input = inputStrings().map { Array($0) } // TODO i should have something for this. i should also be able to take indexes of a string??
     var a1 = 0
     var a2 = 0
     
@@ -20,8 +18,8 @@ func d11() {
     
     
     for (i, g1) in galaxies.enumerated() {
-        for g2 in galaxies.dropFirst(i + 1) {
-            for c in min(g1.x, g2.x)..<max(g1.x, g2.x) {
+        for g2 in galaxies.dropFirst(i + 1) { // TODO i want to be able to say where g1 < g2
+            for c in min(g1.x, g2.x)..<max(g1.x, g2.x) { // TODO i want to be able to support this better
                 if cols.contains(c) {
                     a1 += 1
                     a2 += 1000000 - 1
@@ -61,27 +59,6 @@ func d11() {
         
         return (rows, cols)
     }
-    
-//    func expandSpace() {
-//        var newInput = input
-//        
-//        for r in (0..<input.count).reversed() {
-//            if !newInput[r].contains("#") {
-//                newInput.insert(newInput[r], at: r)
-//            }
-//        }
-//        
-//        for c in (0..<input[0].count).reversed() {
-//            let col = newInput.map({ $0[c] })
-//            if !col.contains("#") {
-//                for r in 0..<newInput.count {
-//                    newInput[r].insert(".", at: c)
-//                }
-//            }
-//        }
-//        
-//        input = newInput
-//    }
     
     func getGalaxies() -> [C2] {
         var list: [C2] = []
