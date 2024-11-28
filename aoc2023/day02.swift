@@ -8,6 +8,7 @@
 import Foundation
 
 func d2() {
+    runType = .real
     let maxes = ["red": 12, "green": 13, "blue": 14]
     let input = inputWords()
     var a1 = 0
@@ -24,6 +25,6 @@ func d2() {
         if valid { a1 += i + 1 }
         a2 += mins.values.product()
     }
-    printAnswer(a1, 8, 2076)
-    printAnswer(a2, 2286, 70950)
+    printAnswer(a1, test: 8, real: 2076)
+    printAnswer(a2, test: 2286, real: 70950)
 }

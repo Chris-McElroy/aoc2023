@@ -8,17 +8,22 @@
 import Foundation
 
 func d8() {
+    runType = .test
     let input = inputWords()
     var a1 = 0
     var a2 = 0
+    
+    print("strings", inputStrings())
     
     let dir = input[0][0]
     
     var mape: [String: [String]] = [:]
     
-    for line in input.dropFirst(2) {
+    for line in input.dropFirst(1) {
         mape[line[0]] = [String(line[2].dropFirst().dropLast()), String(line[3].dropLast())]
     }
+    
+    print(input, dir, mape)
     
     var cur1 = "AAA"
     var step = 0
@@ -50,7 +55,7 @@ func d8() {
     }
     a2 = lcm(ans)
     
-    printAnswer(a1, 6, 15871)
-    printAnswer(a2, 6, 11283670395017)
+    printAnswer(a1, test: 6, real: 15871)
+    printAnswer(a2, test: 6, real: 11283670395017)
     copy(a1)
 }

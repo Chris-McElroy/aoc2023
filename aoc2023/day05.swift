@@ -8,6 +8,7 @@
 import Foundation
 
 func d5() {
+    runType = .real
     let input = inputIntWords()
     var a1 = 0
     var a2 = 0
@@ -71,6 +72,6 @@ func d5() {
     a1 = newSeeds.min()!
     a2 = newRanges.map { $0.lowerBound }.min()!
 
-    printAnswer(a1, 35, 240320250)
-    printAnswer(a2, 46, 28580589)
+    printAnswer(a1, test: 35, real: 240320250)
+    printAnswer(a2, test: 46, real: 28580589)
 }

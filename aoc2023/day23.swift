@@ -8,12 +8,12 @@
 import Foundation
 
 func d23() {
-//    testRun = true
+//    runType = .real
 //    let input = inputStrings()
 //    var a1 = 0
 //    var a2 = 0
 //
-//    printAnswer(a1, nil, nil)
-//    printAnswer(a2, nil, nil)
+//    printAnswer(a1, test: nil, real: nil)
+//    printAnswer(a2, test: nil, real: nil)
 //    copy(a1)
 }

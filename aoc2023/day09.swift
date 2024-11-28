@@ -8,6 +8,7 @@
 import Foundation
 
 func d9() {
+    runType = .real
     let input = inputIntWords()
     var a1 = 0
     var a2 = 0
@@ -27,7 +28,7 @@ func d9() {
         a2 += newBeg
     }
 
-    printAnswer(a1, 114, 2098530125)
-    printAnswer(a2, 2, 1016)
+    printAnswer(a1, test: 114, real: 2098530125)
+    printAnswer(a2, test: 2, real: 1016)
     copy(a1)
 }

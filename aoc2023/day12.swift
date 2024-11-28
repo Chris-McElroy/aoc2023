@@ -58,7 +58,7 @@ func d12() {
         return answer
     }
 
-    printAnswer(a1, 21, 7792)
-    printAnswer(a2, 525152, 13012052341533)
+    printAnswer(a1, test: 21, real: 7792)
+    printAnswer(a2, test: 525152, real: 13012052341533)
     copy(a1)
 }

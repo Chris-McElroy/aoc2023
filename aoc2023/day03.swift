@@ -8,6 +8,7 @@
 import Foundation
 
 func d3() {
+    runType = .real
 	let input = inputStrings()
     var a1 = 0
     var a2 = 0
@@ -43,7 +44,7 @@ func d3() {
         }
     }
     
-    printAnswer(a1, 4361, 535351)
-    printAnswer(a2, 467835, 87287096)
+    printAnswer(a1, test: 4361, real: 535351)
+    printAnswer(a2, test: 467835, real: 87287096)
     copy(a1)
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 func d10() {
+    runType = .real
     let input = inputStrings()
     var a1 = 0
     var a2 = 0
@@ -95,8 +96,8 @@ func d10() {
     a1 = steps/2 + 1
     a2 = input.count*input[0].count - typeMap.count { $0.value != .inside }
     
-    printAnswer(a1, 70, 7173)
-    printAnswer(a2, 8, 291)
+    printAnswer(a1, test: 70, real: 7173)
+    printAnswer(a2, test: 8, real: 291)
     copy(a2)
     
     func facing(d: C2) -> [C2] {

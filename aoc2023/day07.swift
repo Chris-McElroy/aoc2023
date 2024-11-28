@@ -8,6 +8,7 @@
 import Foundation
 
 func d7() {
+    runType = .real
     let input = inputWords()
     var a1 = 0
     var a2 = 0
@@ -65,7 +66,7 @@ func d7() {
         return true
     }
     
-    printAnswer(a1, 6440, 253313241)
-    printAnswer(a2, 5905, 253362743)
+    printAnswer(a1, test: 6440, real: 253313241)
+    printAnswer(a2, test: 5905, real: 253362743)
     copy(a1)
 }

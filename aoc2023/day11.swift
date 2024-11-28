@@ -8,6 +8,7 @@
 import Foundation
 
 func d11() {
+    runType = .real
     let input = inputStrings()
     var a1 = 0
     var a2 = 0
@@ -36,8 +37,8 @@ func d11() {
         }
     }
 
-    printAnswer(a1, 374, 10077850)
-    printAnswer(a2, 82000210, 504715068438)
+    printAnswer(a1, test: 374, real: 10077850)
+    printAnswer(a2, test: 82000210, real: 504715068438)
     copy(a1)
     
     func expandSpace() -> ([Int], [Int]) {

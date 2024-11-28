@@ -8,6 +8,7 @@
 import Foundation
 
 func d6() {
+    runType = .real
     let input = inputIntWords()
     var a1 = 1
     var a2 = 0
@@ -20,8 +21,8 @@ func d6() {
     let dist = Int(input[1].map { String($0) }.joined())!
     a2 = dumbAlgebraSolution(time: time, dist: dist)
     
-    printAnswer(a1, 288, 608902)
-    printAnswer(a2, 71503, 46173809)
+    printAnswer(a1, test: 288, real: 608902)
+    printAnswer(a2, test: 71503, real: 46173809)
 //    copy(a1)
     
     func dumbAlgebraSolution(time: Int, dist: Int) -> Int {

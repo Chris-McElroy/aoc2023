@@ -8,6 +8,7 @@
 import Foundation
 
 func d4() {
+    runType = .real
     let input = inputWords()
     var a1 = 0
     var a2 = 0
@@ -23,7 +24,7 @@ func d4() {
     }
     a2 = tally.sum()
 
-	printAnswer(a1, 13, 23678)
-    printAnswer(a2, 30, 15455663)
+    printAnswer(a1, test: 13, real: 23678)
+    printAnswer(a2, test: 30, real: 15455663)
 //    copy(a2)
 }

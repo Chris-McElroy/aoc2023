@@ -8,6 +8,7 @@
 import Foundation
 
 func d1() {
+    runType = .real
     let input = inputStrings()
     var a1 = 0
     var a2 = 0
@@ -34,6 +35,6 @@ func d1() {
         a1 += n1.0*10 + n1.1
         a2 += n2.0*10 + n2.1
     }
-    printAnswer(a1, 142, 53651)
-    printAnswer(a2, 281, 53894)
+    printAnswer(a1, test: 142, real: 53651)
+    printAnswer(a2, test: 281, real: 53894)
 }
